@@ -22,7 +22,9 @@ Todo es local, con herramientas gratuitas: DISM (incluido en Windows), [W10UI](h
 | `tools/catalog.py` | Busca y descarga del Microsoft Update Catalog (Python, sin dependencias) |
 | `tools/New-IsoImage.ps1` | Crea un ISO booteable BIOS+UEFI con IMAPI2 (sin ADK) |
 | `tools/W10UI/` | W10UI v10.67 (con un parche, ver abajo) |
-| `updates/`, `apps/`, `work/`, `out/` | Descargas de updates y apps, temporales e ISO final (ignorados por git) |
+| `tools/W10MUI/` | W10MUI v25.2 para integrar idiomas. Su subcarpeta `dism\` (binarios) no se versiona: `build.ps1` la descarga de GitHub si falta |
+| `tools/get-langpack.py` | Descarga y verifica (SHA-1) los paquetes de idioma de la build 19041 |
+| `updates/`, `apps/`, `langs/`, `work/`, `out/` | Descargas de updates, apps e idiomas, temporales e ISOs finales (ignorados por git) |
 
 ## Uso
 
@@ -42,6 +44,24 @@ Requisitos: Windows 10/11, **PowerShell como administrador**, Python 3 en el PAT
 Tarda **entre 30 y 60 minutos**. Lo más lento es integrar la acumulativa y la limpieza de componentes.
 
 Progreso: cada etapa imprime `==> [ NN%] ... (transcurrido hh:mm:ss)`, con el porcentaje global aproximado, y además actualiza la barra de `Write-Progress`. Las descargas muestran `[ NN%] x/y MiB` cada 5 %. Durante la etapa de W10UI (20 → 97 %), DISM muestra su propia barra `[==== 45.0% ]` por cada paquete.
+
+### Idioma: inglés o español
+
+| Comando | ISO resultante | Carpeta de trabajo |
+|---|---|---|
+| `build.ps1` (por defecto `-Language en-US`) | `out\..._en-US_actualizado.iso` | `work\dvd` |
+| `build.ps1 -Language es-MX` | `out\..._es-MX_actualizado.iso` | `work\dvd-es-MX` |
+
+Cada idioma tiene su carpeta y su ISO: construir uno **no borra** el otro. `-SkipIntegration` también funciona por idioma, por ejemplo `-Language es-MX -SkipIntegration`.
+
+Cómo se arma el ISO en español:
+1. `tools/get-langpack.py` descarga el **paquete de idioma es-MX** y 17 paquetes complementarios desde el CDN de Microsoft. Toma los enlaces de la API de [uupdump](https://uupdump.net) y **verifica el SHA-1** de cada archivo. Los complementarios son: corrector, escritura a mano, OCR, voz, texto a voz, y las partes en español de Bloc de notas, Paint, WordPad, PowerShell ISE, impresión y Grabación de acciones de pasos. Además, `build.ps1` verifica la firma de Microsoft de cada `.cab`. Todo queda en `langs\es-MX\`.
+2. **W10MUI** (abbodi1406, carpeta `tools/W10MUI`) agrega el idioma a `install.wim`, lo deja como **predeterminado** y *después* reintegra las actualizaciones con nuestro W10UI parcheado. El orden importa: si el idioma se agrega después de la acumulativa, quedan componentes sin actualizar. Por eso este build tarda **60–90 min**.
+3. `autounattend.xml` se ajusta solo con `UILanguage = es-MX`, así que el instalador y Windows quedan en español. Formatos, teclado y zona horaria ya eran de México.
+
+**"Solo español"**: la cuenta que creas en el OOBE solo tiene **español (México)** en su lista de idiomas, y Configuración no ofrece inglés. El paquete **en-US sigue instalado internamente** porque es el idioma base de la imagen. Quitarlo es posible, pero algunos componentes que no traen traducción usan el inglés como respaldo, y sin él mostrarían textos vacíos. No vale la pena el riesgo por unos cuantos MB.
+
+Para otro idioma (por ejemplo `es-ES`), corre `build.ps1 -Language es-ES`. El descargador toma los nombres de archivo de las listas de W10MUI para la build 19041.
 
 ### Actualizar el ISO cada mes
 
