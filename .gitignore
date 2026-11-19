@@ -1,0 +1,7 @@
+*.iso
+work/
+out/
+updates/
+apps/
+tools/W10UI/W10UI_Debug.log
+__pycache__/

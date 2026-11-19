@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Windows 10 IoT Enterprise LTSC 2021 - instalación semi-desatendida.
+  - Sin selección de idioma: interfaz en-US (único idioma de la imagen), formatos es-MX,
+    teclado "Español (México) - Estados Unidos-Internacional" (080a:00020409).
+  - EULA aceptada automáticamente.
+  - Particionado MANUAL: no hay <DiskConfiguration> ni <InstallTo>, el instalador muestra la pantalla de discos.
+  - OOBE: pide crear la cuenta local (nombre/contraseña/preguntas), sin pantallas de cuenta Microsoft
+    ni de "privacidad" (ProtectYourPC=3 -> opciones de envío de datos desactivadas).
+  - SetupComplete.cmd (ver $OEM$) instala Edge/ImageGlass/winget y aplica el endurecimiento de seguridad.
+  - Primer inicio de sesión: menú con casillas para instalar apps opcionales vía winget.
+-->
+<unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+  <settings pass="windowsPE">
+    <component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <SetupUILanguage>
+        <UILanguage>en-US</UILanguage>
+      </SetupUILanguage>
+      <InputLocale>080a:00020409</InputLocale>
+      <SystemLocale>es-MX</SystemLocale>
+      <UILanguage>en-US</UILanguage>
+      <UserLocale>es-MX</UserLocale>
+    </component>
+    <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <UserData>
+        <AcceptEula>true</AcceptEula>
+      </UserData>
+    </component>
+  </settings>
+
+  <settings pass="specialize">
+    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <TimeZone>Central Standard Time (Mexico)</TimeZone>
+    </component>
+  </settings>
+
+  <settings pass="oobeSystem">
+    <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <InputLocale>080a:00020409</InputLocale>
+      <SystemLocale>es-MX</SystemLocale>
+      <UILanguage>en-US</UILanguage>
+      <UserLocale>es-MX</UserLocale>
+    </component>
+    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <OOBE>
+        <HideEULAPage>true</HideEULAPage>
+        <HideOEMRegistrationScreen>true</HideOEMRegistrationScreen>
+        <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
+        <HideWirelessSetupInOOBE>false</HideWirelessSetupInOOBE>
+        <ProtectYourPC>3</ProtectYourPC>
+      </OOBE>
+      <!-- Menú de apps opcionales en el primer inicio de sesión. "start" para no bloquear la carga del escritorio. -->
+      <FirstLogonCommands>
+        <SynchronousCommand wcm:action="add">
+          <Order>1</Order>
+          <CommandLine>cmd.exe /c start "" powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Windows\Setup\Scripts\apps-opcionales.ps1</CommandLine>
+          <Description>Apps opcionales</Description>
+        </SynchronousCommand>
+      </FirstLogonCommands>
+    </component>
+  </settings>
+</unattend>

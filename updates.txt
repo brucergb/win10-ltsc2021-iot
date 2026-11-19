@@ -1,0 +1,16 @@
+# Actualizaciones a integrar (IDs del Microsoft Update Catalog).
+# Formato: <updateID>  # descripción
+# Para buscar las del mes:  python tools\catalog.py search "2026-12 Cumulative Update for Windows 10 Version 21H2 x64"
+# Revisado: 2026-11-19
+
+# LCU noviembre 2026 (OOB 13-nov, incluye la de seguridad del 10-nov y el SSU) -> build 19044.7850
+0f74a7f2-f0c7-4210-9f88-c6f7e2018315  # 2026-11 Cumulative Update for Windows 10 Version 21H2 x64 (KB5136493)
+
+# .NET Framework 3.5 y 4.8 (la imagen trae 4.8; en noviembre no salió una nueva para 21H2)
+bffbc758-c225-406c-acba-cc7b56391c9d  # 2026-10 Cumulative Update for .NET Framework 3.5 and 4.8 x64 (KB5127683)
+
+# Safe OS Dynamic Update (actualiza WinRE dentro de install.wim)
+735cc75c-d11f-4e31-8e6a-a5a1dad771c2  # 2026-11 Dynamic Update for Windows 10 Version 21H2 x64 (KB5131095)
+
+# Setup Dynamic Update (archivos de \sources del instalador)
+dc8a6371-7957-4e4a-802a-db2d8c3ef867  # 2026-09 Dynamic Update for Windows 10 Version 21H2 x64 (KB5126029)
