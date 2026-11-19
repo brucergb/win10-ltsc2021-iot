@@ -2,6 +2,8 @@
   { "name": "7-Zip",                          "ids": ["7zip.7zip"],                                            "desc": "Compresor/descompresor (zip, 7z, rar...)" },
   { "name": "Notepad++",                      "ids": ["Notepad++.Notepad++"],                                  "desc": "Editor de texto/código" },
   { "name": "VLC",                            "ids": ["VideoLAN.VLC"],                                         "desc": "Reproductor de video/audio" },
+  { "name": "AIMP",                           "ids": ["AIMP.AIMP"],                                            "desc": "Reproductor de música" },
+  { "name": "qBittorrent",                    "ids": ["qBittorrent.qBittorrent"],                              "desc": "Cliente BitTorrent de código abierto, sin anuncios" },
   { "name": "ONLYOFFICE",                     "ids": ["ONLYOFFICE.DesktopEditors"],                            "desc": "Suite ofimática compatible con Word/Excel/PowerPoint" },
   { "name": "Zoom",                           "ids": ["Zoom.Zoom"],                                            "desc": "Videollamadas" },
   { "name": "Brave",                          "ids": ["Brave.Brave"],                                          "desc": "Navegador con bloqueo de anuncios" },

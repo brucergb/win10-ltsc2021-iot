@@ -7,7 +7,7 @@ Genera un ISO de **Windows 10 IoT Enterprise LTSC 2021** con:
 - **Instalación semi-desatendida**: no pregunta idioma ni EULA y no ofrece cuenta Microsoft. **Sí pregunta el disco/particiones** y la **cuenta local**.
 - **Ajustes de seguridad y privacidad** que se aplican solos al final de la instalación.
 - **Apps por defecto (offline):** Edge actualizado, **ImageGlass** como visor de imágenes predeterminado (con el Visor de fotos clásico como alternativa) y **winget**. Internet Explorer 11 se quita.
-- **Apps opcionales:** en el primer inicio de sesión aparece un menú con casillas para instalar con winget, siempre en la última versión: 7-Zip, Notepad++, VLC, ONLYOFFICE, Zoom, Brave, PowerToys, Visual C++, Windows Terminal, Minecraft Launcher y Microsoft Store (experimental).
+- **Apps opcionales:** en el primer inicio de sesión aparece un menú con casillas para instalar con winget, siempre en la última versión: 7-Zip, Notepad++, VLC, AIMP, qBittorrent, ONLYOFFICE, Zoom, Brave, PowerToys, Visual C++, Windows Terminal, Minecraft Launcher y Microsoft Store (experimental).
 
 Todo es local, con herramientas gratuitas: DISM (incluido en Windows), [W10UI](https://github.com/abbodi1406/BatUtil/tree/master/W10UI) de abbodi1406 y un script propio para descargar del Microsoft Update Catalog.
 
