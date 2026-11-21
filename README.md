@@ -185,3 +185,9 @@ El ISO no incluye ninguna clave. Windows se instala sin activar; actívalo con t
 Público: `git clone https://github.com/brucergb/win10-ltsc2021-iot.git C:\Repo\win10-ltsc2021-iot`
 
 Los ISO, `work/`, `out/` y las actualizaciones descargadas no se versionan.
+
+## Licencia
+
+[MIT](LICENSE) para el código propio de este repo (`build.ps1`, `unattend/`, `tools/New-IsoImage.ps1`,
+`tools/catalog.py`, `tools/get-langpack.py`). `tools/W10UI/` y `tools/W10MUI/` son de
+[abbodi1406](https://github.com/abbodi1406/BatUtil) y conservan sus propios términos.
