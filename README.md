@@ -179,3 +179,9 @@ Reinicia después de cambiar `RunAsPPL` o las features.
 ## Activación
 
 El ISO no incluye ninguna clave. Windows se instala sin activar; actívalo con tu licencia de IoT Enterprise LTSC 2021 (Settings → Activation, o `slmgr /ipk <clave>`).
+
+## Repositorio
+
+Público: `git clone https://github.com/brucergb/win10-ltsc2021-iot.git C:\Repo\win10-ltsc2021-iot`
+
+Los ISO, `work/`, `out/` y las actualizaciones descargadas no se versionan.
